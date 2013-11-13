@@ -1,0 +1,25 @@
+{
+  "name": "dartscoring-backbone",
+  "private": true,
+  "version": "0.0.1",
+  "description": "A dart scoring js application in backbone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/adamclerk/dartscoring-backbone.git"
+  },
+  "keywords": [
+    "dart",
+    "scoring"
+  ],
+  "author": "Adam Clark <adamclerk@gmail.com>",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "8e683dcb5428ed1274754704215cb11f301ea2dc",
+  "dependencies": {
+    "grunt": "~0.4.1"
+  }
+}
