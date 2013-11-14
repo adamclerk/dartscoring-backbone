@@ -13,32 +13,33 @@ module.exports = function(grunt) {
     // Task configuration.
     jshint: {
       options: {
-        curly: true,
-        eqeqeq: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        unused: true,
-        boss: true,
-        eqnull: true,
-        globals: {}
+        jshintrc: true
       },
       gruntfile: {
         src: 'Gruntfile.js'
       },
       src: {
-        src: ['src/**/*.js']
+        src: ['app/**/*.js']
       }
     },
+    exec: {
+      npm_update: {
+        cmd: 'npm install'
+      },
+      bower_update: {
+        cmd: 'bower install'
+      }
+    }
   });
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-exec');
 
   // Default task.
   grunt.registerTask('default', ['jshint']);
+  
+  //Init the project
+  grunt.registerTask('init', ['exec:npm_update', 'exec:bower_update']);
 
 };
