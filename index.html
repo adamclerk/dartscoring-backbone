@@ -14,10 +14,18 @@
         <script src="static/bower/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
+        
         <div class='content'>
             <h1>Dart Scoreboard</h1>
+            <div class='dartboard'></div>
             <!-- Add your site or application content here -->
         </div>
         <script data-main="app/main" src="static/bower/requirejs/require.js"></script>
+        <script type='hbs' id='dartboardhbs'>
+            <dl>
+                <dt>Players</dt> <dd>{{player_count}}</dd>
+                <dt>Game</dt> <dd>{{game}}</dd>
+            </dl>
+        </script>
     </body>
 </html>

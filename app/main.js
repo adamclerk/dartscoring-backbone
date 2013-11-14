@@ -7,15 +7,22 @@ require.config({
 		'collection': 'app/collection',
 		'jquery': 'static/bower/jquery/jquery.min',
 		'underscore': 'static/bower/underscore/underscore-min',
-		'backbone': 'static/bower/backbone/backbone-min'
+		'backbone': 'static/bower/backbone/backbone-min',
+		'handlebars': 'static/bower/handlebars/handlebars.min'
 	},
 	shim: {
-		'jqjery':{
+		'jquery':{
 			exports: '$'
 		},
 		'backbone': {
 			deps: ['underscore', 'jquery'],
 			exports: 'Backbone'
+		},
+		'underscore': {
+			exports: '_'
+		},
+		'handlebars': {
+			exports: 'Handlebars'
 		}
 	}
 });
