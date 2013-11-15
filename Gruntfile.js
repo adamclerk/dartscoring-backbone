@@ -22,24 +22,40 @@ module.exports = function(grunt) {
         src: ['app/**/*.js']
       }
     },
+    jsonlint: {
+      config: {
+        src: ['package.json', 'bower.json']
+      },
+      data: {
+        src: ['data/**/*.json']
+      }
+    },
     exec: {
       npm_update: {
         cmd: 'npm install'
       },
       bower_update: {
         cmd: 'bower install'
+      },
+      start: {
+        cmd: 'echo "starting server on port 8000" & startweb'
       }
     }
   });
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-jsonlint');
   grunt.loadNpmTasks('grunt-exec');
 
-  // Default task.
-  grunt.registerTask('default', ['jshint']);
+  // Double Check the Project.
+  grunt.registerTask('check', ['jsonlint', 'jshint']);
   
-  //Init the project
+  // Init the project
   grunt.registerTask('init', ['exec:npm_update', 'exec:bower_update']);
 
+  // Run the project
+  grunt.registerTask('start', ['exec:npm_update', 'exec:bower_update', 'check', 'exec:start']);
+
+  grunt.registerTask('default', ['start']);
 };

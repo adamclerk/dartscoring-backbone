@@ -5,6 +5,8 @@ require.config({
 		'model': 'app/model',
 		'view': 'app/view',
 		'collection': 'app/collection',
+		'template': 'static/template',
+		text: 'static/bower/requirejs-text/text',
 		'jquery': 'static/bower/jquery/jquery.min',
 		'underscore': 'static/bower/underscore/underscore-min',
 		'backbone': 'static/bower/backbone/backbone-min',

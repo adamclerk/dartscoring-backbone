@@ -1,19 +1,17 @@
-define(['backbone', 'jquery', 'handlebars'], 
-	function(Backbone, $, Handlebars){
-
-	var DartModel = Backbone.Model.extend({});
-
-	var DartView = Backbone.View.extend({
-		initialize: function () {
-			this.render();
-		},
-		render: function () {
-			var source = $('script#dartboardhbs').text();
-			var template = Handlebars.compile(source);
-			this.$el.html(template(this.model.toJSON()));
-		}
-	});
-
+define([ 
+	'jquery', 
+	'backbone',
+	'handlebars', 
+	'view/dart',
+	'model/dart'
+], 
+function(
+	$, 
+	Backbone, 
+	Handlebars, 
+	DartView,
+	DartModel
+){
 	var router = Backbone.Router.extend({
 		routes: {
 			"": "index"
