@@ -1,4 +1,16 @@
-<dl>
-    <dt>Players</dt> <dd>{{player_count}}</dd>
-    <dt>Game</dt> <dd>{{game}}</dd>
-</dl>
+<div class='dartboard'>
+	<div class='region'></div>
+	{{#each board.regions}}
+		<div class='region {{klass}}' data-value='{{value}}' data-multi='{{multi}}'>{{value}} x {{multi}}</div>
+	{{/each}}
+</div>
+<div class='score-card'>
+		<div class='throws'>Throws</div>
+		<div class='name'>Name</div>
+		<div class='score'>Score</div>
+	{{#each game.players}}
+		<div class='throws'>{{#if throws_left}}{{throws_left}}{{else}}-{{/if}}</div>
+		<div class='name'>{{name}}</div>
+		<div class='score'>{{score}}</div>
+	{{/each}}
+</div>

@@ -5,6 +5,7 @@ require.config({
 		'model': 'app/model',
 		'view': 'app/view',
 		'collection': 'app/collection',
+		'game': 'app/game',
 		'template': 'static/template',
 		text: 'static/bower/requirejs-text/text',
 		'jquery': 'static/bower/jquery/jquery.min',
@@ -29,7 +30,12 @@ require.config({
 	}
 });
 
+require(['game/101'], function(){
+	//console.log('loading games');
+});
+
 require(['backbone', 'router'], function(Backbone, Router) {
 	new Router();
 	Backbone.history.start({pushState: true, root:'/'});
 });
+

@@ -17,15 +17,14 @@ function(
 			"": "index"
 		},
 		index: function(){
-			var dartmodel = new DartModel({
-				game: '101',
-				player_count: 6
-			});
+			var dartmodel = new DartModel();
 			
 			new DartView({
-				el: '.dartboard',
+				el: '.dartscoring',
 				model: dartmodel
 			});
+
+			dartmodel.fetch();
 		}
 	});
 

@@ -1,4 +1,56 @@
 .content {
-	width: 300px;
+	width: 500px;
 	margin: 0 auto;
+}
+
+.dartboard {
+	width: 200px;
+	float: left;
+}
+
+.dartboard .region {
+	float:left;
+	width:60px;
+	height:15px;
+	color:white;
+	text-align: center;
+	border-bottom:solid 1px white;
+	font-size:.7em;
+	cursor:pointer;
+}
+
+.dartboard .single {
+	background: black;
+}
+
+.dartboard .double {
+	background: red;
+}
+
+.dartboard .triple {
+	background: green;
+}
+
+.score-card{
+	width: 300px;
+ 	float: left;
+}
+
+.score-card .throws {
+	float:left;
+	width:100px;
+}
+
+.score-card .name {
+	float:left;
+	width:100px;
+}
+
+.score-card .score {
+	float:left;
+	width:100px;
+}
+
+.region {
+	cursor: pointer;
 }
