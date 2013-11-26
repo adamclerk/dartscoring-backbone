@@ -30,10 +30,6 @@ require.config({
 	}
 });
 
-require(['game/101'], function(){
-	//console.log('loading games');
-});
-
 require(['backbone', 'router'], function(Backbone, Router) {
 	new Router();
 	Backbone.history.start({pushState: true, root:'/'});

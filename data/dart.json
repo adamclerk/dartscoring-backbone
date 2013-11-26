@@ -1,7 +1,7 @@
 {
-	"game": "101",
 	"options":{
-		"winning_score": 301
+		"name": "301",
+		"winningScore": 301
 	},
 	"players":[
 		"wes",
@@ -10,28 +10,6 @@
 		"matt",
 		"josh"
 	],
-	"thrws":[
-		{"region": 25, "multi": 2},
-		{"region": 10, "multi": 1},
-		{"region": 25, "multi": 2},
-		{"region": 10, "multi": 1},
-		{"region": 25, "multi": 2},
-		{"region": 10, "multi": 1},
-		{"region": 25, "multi": 2},
-		{"region": 10, "multi": 1},
-		{"region": 25, "multi": 2},
-		{"region": 10, "multi": 1},
-		{"region": 25, "multi": 2},
-		{"region": 10, "multi": 1},
-		{"region": 25, "multi": 2},
-		{"region": 10, "multi": 1},
-		{"region": 25, "multi": 2},
-		{"region": 10, "multi": 1},
-		{"region": 25, "multi": 2},
-		{"region": 10, "multi": 1},
-		{"region": 25, "multi": 2},
-		{"region": 10, "multi": 1},
-		{"region": 25, "multi": 2},
-		{"region": 10, "multi": 1}
+	"dartsThrown":[
 	]
 }

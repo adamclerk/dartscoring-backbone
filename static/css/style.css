@@ -1,5 +1,5 @@
 .content {
-	width: 500px;
+	width: 800px;
 	margin: 0 auto;
 }
 
@@ -32,23 +32,23 @@
 }
 
 .score-card{
-	width: 300px;
+	width: 600px;
  	float: left;
 }
 
-.score-card .throws {
+.score-card .throws, .score-card .name, .score-card .score,.score-card .winner,.score-card .bust {
 	float:left;
 	width:100px;
 }
 
-.score-card .name {
+.throw-history {
+	width:500px;
 	float:left;
-	width:100px;
 }
 
-.score-card .score {
-	float:left;
+.throw-history .name, .throw-history .region, .throw-history .multi {
 	width:100px;
+	float:left;
 }
 
 .region {

@@ -1,16 +1,95 @@
-<div class='dartboard'>
-	<div class='region'></div>
-	{{#each board.regions}}
-		<div class='region {{klass}}' data-value='{{value}}' data-multi='{{multi}}'>{{value}} x {{multi}}</div>
-	{{/each}}
+<div class="dartboard">
+		<div class="region single" data-value='0' data-multi='0'>Miss</div>
+		<div class="region double" data-value="25" data-multi="2">25 x 2</div>
+		<div class="region single" data-value="25" data-multi="1">25 x 1</div>
+		<div class="region triple" data-value="20" data-multi="3">20 x 3</div>
+		<div class="region double" data-value="20" data-multi="2">20 x 2</div>
+		<div class="region single" data-value="20" data-multi="1">20 x 1</div>
+		<div class="region triple" data-value="19" data-multi="3">19 x 3</div>
+		<div class="region double" data-value="19" data-multi="2">19 x 2</div>
+		<div class="region single" data-value="19" data-multi="1">19 x 1</div>
+		<div class="region triple" data-value="18" data-multi="3">18 x 3</div>
+		<div class="region double" data-value="18" data-multi="2">18 x 2</div>
+		<div class="region single" data-value="18" data-multi="1">18 x 1</div>
+		<div class="region triple" data-value="17" data-multi="3">17 x 3</div>
+		<div class="region double" data-value="17" data-multi="2">17 x 2</div>
+		<div class="region single" data-value="17" data-multi="1">17 x 1</div>
+		<div class="region triple" data-value="16" data-multi="3">16 x 3</div>
+		<div class="region double" data-value="16" data-multi="2">16 x 2</div>
+		<div class="region single" data-value="16" data-multi="1">16 x 1</div>
+		<div class="region triple" data-value="15" data-multi="3">15 x 3</div>
+		<div class="region double" data-value="15" data-multi="2">15 x 2</div>
+		<div class="region single" data-value="15" data-multi="1">15 x 1</div>
+		<div class="region triple" data-value="14" data-multi="3">14 x 3</div>
+		<div class="region double" data-value="14" data-multi="2">14 x 2</div>
+		<div class="region single" data-value="14" data-multi="1">14 x 1</div>
+		<div class="region triple" data-value="13" data-multi="3">13 x 3</div>
+		<div class="region double" data-value="13" data-multi="2">13 x 2</div>
+		<div class="region single" data-value="13" data-multi="1">13 x 1</div>
+		<div class="region triple" data-value="12" data-multi="3">12 x 3</div>
+		<div class="region double" data-value="12" data-multi="2">12 x 2</div>
+		<div class="region single" data-value="12" data-multi="1">12 x 1</div>
+		<div class="region triple" data-value="11" data-multi="3">11 x 3</div>
+		<div class="region double" data-value="11" data-multi="2">11 x 2</div>
+		<div class="region single" data-value="11" data-multi="1">11 x 1</div>
+		<div class="region triple" data-value="10" data-multi="3">10 x 3</div>
+		<div class="region double" data-value="10" data-multi="2">10 x 2</div>
+		<div class="region single" data-value="10" data-multi="1">10 x 1</div>
+		<div class="region triple" data-value="9" data-multi="3">9 x 3</div>
+		<div class="region double" data-value="9" data-multi="2">9 x 2</div>
+		<div class="region single" data-value="9" data-multi="1">9 x 1</div>
+		<div class="region triple" data-value="8" data-multi="3">8 x 3</div>
+		<div class="region double" data-value="8" data-multi="2">8 x 2</div>
+		<div class="region single" data-value="8" data-multi="1">8 x 1</div>
+		<div class="region triple" data-value="7" data-multi="3">7 x 3</div>
+		<div class="region double" data-value="7" data-multi="2">7 x 2</div>
+		<div class="region single" data-value="7" data-multi="1">7 x 1</div>
+		<div class="region triple" data-value="6" data-multi="3">6 x 3</div>
+		<div class="region double" data-value="6" data-multi="2">6 x 2</div>
+		<div class="region single" data-value="6" data-multi="1">6 x 1</div>
+		<div class="region triple" data-value="5" data-multi="3">5 x 3</div>
+		<div class="region double" data-value="5" data-multi="2">5 x 2</div>
+		<div class="region single" data-value="5" data-multi="1">5 x 1</div>
+		<div class="region triple" data-value="4" data-multi="3">4 x 3</div>
+		<div class="region double" data-value="4" data-multi="2">4 x 2</div>
+		<div class="region single" data-value="4" data-multi="1">4 x 1</div>
+		<div class="region triple" data-value="3" data-multi="3">3 x 3</div>
+		<div class="region double" data-value="3" data-multi="2">3 x 2</div>
+		<div class="region single" data-value="3" data-multi="1">3 x 1</div>
+		<div class="region triple" data-value="2" data-multi="3">2 x 3</div>
+		<div class="region double" data-value="2" data-multi="2">2 x 2</div>
+		<div class="region single" data-value="2" data-multi="1">2 x 1</div>
+		<div class="region triple" data-value="1" data-multi="3">1 x 3</div>
+		<div class="region double" data-value="1" data-multi="2">1 x 2</div>
+		<div class="region single" data-value="1" data-multi="1">1 x 1</div>
 </div>
 <div class='score-card'>
+	<h2>Game: {{options.name}}{{#if options.winner}}  Winner: {{options.winner}}{{/if}}</h2>
 		<div class='throws'>Throws</div>
 		<div class='name'>Name</div>
 		<div class='score'>Score</div>
-	{{#each game.players}}
-		<div class='throws'>{{#if throws_left}}{{throws_left}}{{else}}-{{/if}}</div>
+		<div class='score'>To Win</div>
+		<div class='bust'>Busts</div>
+		<div class='winner'>Winner</div>
+	{{#each players}}
+		<div class='throws'>{{#if throwsLeft}}{{throwsLeft}}{{else}}-{{/if}}</div>
 		<div class='name'>{{name}}</div>
 		<div class='score'>{{score}}</div>
+		<div class='score'>{{scoreToWin}}</div>
+		<div class='bust'>{{busts}}</div>
+		<div class='winner'>{{#if won}}Winner{{else}}-{{/if}}</div>
+	{{/each}}
+</div>
+<div class='throw-history'>
+	<h2>History</h2>
+		<div class='name'>Player</div>
+		<div class='region'>Region</div>
+		<div class='multi'>Multiplyer</div>
+		<div class='total'>Total</div>
+	{{#each dartsThrown}}
+		<div class='name'>{{name}}</div>
+		<div class='region'>{{region}}</div>
+		<div class='multi'>{{multi}}</div>
+		<div class='total'>{{total}}</div>
 	{{/each}}
 </div>

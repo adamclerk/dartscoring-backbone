@@ -3,28 +3,28 @@ define([
 	'backbone',
 	'handlebars', 
 	'view/dart',
-	'model/dart'
+	'model/101'
 ], 
 function(
 	$, 
 	Backbone, 
 	Handlebars, 
 	DartView,
-	DartModel
+	Dart101Model
 ){
 	var router = Backbone.Router.extend({
 		routes: {
 			"": "index"
 		},
 		index: function(){
-			var dartmodel = new DartModel();
+			var dart101model = new Dart101Model();
 			
 			new DartView({
 				el: '.dartscoring',
-				model: dartmodel
+				model: dart101model
 			});
 
-			dartmodel.fetch();
+			dart101model.fetch();
 		}
 	});
 
