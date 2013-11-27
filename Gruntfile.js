@@ -38,7 +38,7 @@ module.exports = function(grunt) {
         cmd: 'bower install'
       },
       start: {
-        cmd: 'echo "starting server on port 8000" & startweb'
+        cmd: 'echo "starting server on port 8000" & ./backend/server.js'
       }
     }
   });

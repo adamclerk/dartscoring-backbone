@@ -10,7 +10,10 @@ require.config({
 		'jquery': 'static/bower/jquery/jquery.min',
 		'underscore': 'static/bower/underscore/underscore-min',
 		'backbone': 'static/bower/backbone/backbone-min',
-		'handlebars': 'static/bower/handlebars/handlebars.min'
+		'handlebars': 'app/hbs/handlebars',
+		'hbs': 'static/bower/handlebars/handlebars.min',
+		'socket.io': 'socket.io/socket.io',
+		'backbone.io': 'socket.io/backbone.io'
 	},
 	shim: {
 		'jquery':{
@@ -23,13 +26,25 @@ require.config({
 		'underscore': {
 			exports: '_'
 		},
-		'handlebars': {
+		'hbs': {
 			exports: 'Handlebars'
+		},
+		'socket.io': {
+			exports: 'io'
+		},
+		'backbone.io': {
+			deps: ['socket.io','underscore','backbone']
 		}
 	}
 });
 
-require(['backbone', 'router'], function(Backbone, Router) {
+require(['backbone', 'router', 'backbone.io'], function(Backbone, Router) {
+	Backbone.io.connect();
+	var MyCollection = Backbone.Collection.extend({
+        backend: 'mybackend'
+    });
+    var collection = new MyCollection();
+    collection.fetch();
 	new Router();
-	Backbone.history.start({pushState: true, root:'/'});
+	//Backbone.history.start({pushState: false, root:'/'});
 });

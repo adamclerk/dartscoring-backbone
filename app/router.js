@@ -2,28 +2,31 @@ define([
 	'jquery', 
 	'backbone',
 	'handlebars', 
-	'view/dart',
-	'model/dart'
+	'view/dartScoring',
+	'model/dartScoring'
 ], 
 function(
 	$, 
 	Backbone, 
 	Handlebars, 
-	DartView,
-	DartModel
+	DartScoringView,
+	DartScoringModel
 ){
 	var router = Backbone.Router.extend({
 		routes: {
-			"": "index"
+			"": "index",
+			":game": "index"
 		},
-		index: function(){
-			var dartmodel = new DartModel({
-				game: '101',
-				player_count: 6
-			});
+		index: function(game){
+
+			var modeloptions = {url: '/data/game'};
+			if(game){
+				modeloptions.id = game;
+			}
 			
-			new DartView({
-				el: '.dartboard',
+			var dartmodel = new DartScoringModel(modeloptions);
+			new DartScoringView({
+				el: '.content',
 				model: dartmodel
 			});
 		}
