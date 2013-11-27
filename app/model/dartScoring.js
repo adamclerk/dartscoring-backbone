@@ -7,20 +7,26 @@ define([
 function (_, Backbone, Player, DartThrow) {
 	var DartScoringModel = Backbone.Model.extend({
 		backend: {name: 'dartbackend'},
-		constructor: function (gameid) {
-			if(!gameid){
-				gameid = parseInt(Math.random() * 10000);
+		constructor: function (options) {
+			if(!options.id){
+				options.id = parseInt(Math.random() * 10000);
 			}
 
-			this.backend.channel = gameid;
+			this.backend.channel = options.id;
 
-			this.players = new Player.Collection(null, {gameid: gameid});
-			this.players.listenTo('change', this.save, this);
+			this.players = new Player.Collection(null, {gameid: options.id});
+			this.players.on('change', this.save, this);
 
-			this.dartsThrown = new DartThrow.Collection(null, {gameid: gameid});
-			this.dartsThrown.listenTo('change', this.save, this);
+			this.dartsThrown = new DartThrow.Collection(null, {gameid: options.id});
+			this.dartsThrown.on('change', this.save, this);
 
 			Backbone.Model.apply(this, arguments);
+		},
+		initialize: function () {
+			//var self = this;
+			this.on('all', function () {
+				//console.log(arguments);
+			});
 		},
 		parse: function (resp) {
 			this.players.set(resp.players, {parse: true, remove: false});

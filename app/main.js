@@ -40,11 +40,6 @@ require.config({
 
 require(['backbone', 'router', 'backbone.io'], function(Backbone, Router) {
 	Backbone.io.connect();
-	var MyCollection = Backbone.Collection.extend({
-        backend: 'mybackend'
-    });
-    var collection = new MyCollection();
-    collection.fetch();
 	new Router();
-	//Backbone.history.start({pushState: false, root:'/'});
+	Backbone.history.start({pushState: false, root:'/'});
 });

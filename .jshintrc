@@ -13,6 +13,7 @@
     "globals": {},
     "predef": [
       "require",
-      "define"
+      "define",
+      "console"
     ]
 }
