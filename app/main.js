@@ -5,6 +5,7 @@ require.config({
 		'model': 'app/model',
 		'view': 'app/view',
 		'collection': 'app/collection',
+		'event': 'app/event',
 		'template': 'static/template',
 		text: 'static/bower/requirejs-text/text',
 		'jquery': 'static/bower/jquery/jquery.min',
@@ -12,8 +13,7 @@ require.config({
 		'backbone': 'static/bower/backbone/backbone-min',
 		'handlebars': 'app/hbs/handlebars',
 		'hbs': 'static/bower/handlebars/handlebars.min',
-		'socket.io': 'socket.io/socket.io',
-		'backbone.io': 'socket.io/backbone.io'
+		'socket.io': 'static/bower/socket.io-client/dist/socket.io.min'
 	},
 	shim: {
 		'jquery':{
@@ -28,18 +28,11 @@ require.config({
 		},
 		'hbs': {
 			exports: 'Handlebars'
-		},
-		'socket.io': {
-			exports: 'io'
-		},
-		'backbone.io': {
-			deps: ['socket.io','underscore','backbone']
 		}
 	}
 });
 
-require(['backbone', 'router', 'backbone.io'], function(Backbone, Router) {
-	Backbone.io.connect();
+require(['backbone', 'router'], function(Backbone, Router) {
 	new Router();
 	Backbone.history.start({pushState: false, root:'/'});
 });

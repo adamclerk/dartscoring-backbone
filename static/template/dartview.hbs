@@ -1,2 +1,11 @@
-
-{{> dartboard}}
+<div class='left'>
+	{{> dartboard}}
+</div>
+<div class='right'>
+	Game: {{options.game}}<br/>
+	Name: {{options.name}}<br/>
+	{{#each dartsThrown}}
+		Region: {{region}}<br/>
+		Multi: {{multi}}<br/><br/>
+	{{/each}}
+</div>

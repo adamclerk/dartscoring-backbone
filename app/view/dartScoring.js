@@ -12,7 +12,8 @@ function (
 ) {
 	var DartView = Backbone.View.extend({
 		initialize: function () {
-			this.render();
+			//this.listenTo(this.model, 'all', function(){console.log(arguments)});
+			this.listenTo(this.model, 'change', this.render);
 		},
 		events:{
 			"click .region": "throwDart",
@@ -35,9 +36,9 @@ function (
 		},
 		throwDart: function (ev) {
 			ev.preventDefault();
-			//var ele = $(ev.currentTarget);
-			//var dart = {region: ele.attr('data-value'), multi: ele.attr('data-multi')};
-			//console.log(dart);
+			var ele = $(ev.currentTarget);
+			var dart = {region: ele.attr('data-value'), multi: ele.attr('data-multi')};
+			this.model.throwDart(dart);
 		}
 
 	});

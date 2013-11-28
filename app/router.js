@@ -12,7 +12,6 @@ function(
 	DartScoringView,
 	DartScoringModel
 ){
-	console.log('router started');
 	var router = Backbone.Router.extend({
 		routes: {
 			"": "index",
@@ -22,20 +21,19 @@ function(
 			console.log('start new game');
 		},
 		game: function(game){
-			console.log('index');
-			var modeloptions = {url: '/data/game'};
+			var modeloptions = {};
 
 			if(game){
 				modeloptions.id = game;
 			}
+
 			var dartmodel = new DartScoringModel(modeloptions);
-			var dartview = new DartScoringView({
+			new DartScoringView({
 				el: '.content',
 				model: dartmodel
 			});
 
 			dartmodel.fetch();
-			dartview.render();
 		}
 	});
 

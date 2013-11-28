@@ -1,18 +1,22 @@
 #!/usr/bin/env node
 
 var express = require('express');
-var backboneio = require('backbone.io');
 
 var games = {
-	110:{
-		options: {},
+	"001":{
+		options: {
+			game: "101",
+			name: "301",
+			winning_score: 301
+		},
 		players: [],
 		dartsThrown: []
 	}
 };
 var app = express();
 app.use(express.static(__dirname + "/.."));
-app.use(express.bodyParser());
+app.use(express.urlencoded())
+app.use(express.json())
 
 app.get('/data/games', function(req, res){
 	res.send(games);
@@ -31,28 +35,13 @@ app.get('/data/games/:id', function(req, res){
 
 var http = require('http');
 var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+
 server.listen(8000);
 console.log('http://localhost:8000/');
 
-var backend = backboneio.createBackend();
-
-/*backend.use(function(req, res, next) {
-  console.log(req.backend);
-  console.log(req.method);
-  console.log(JSON.stringify(req.model));
-  next();
+io.sockets.on('connection', function (socket) {
+  socket.on('throwDart', function (dart) {
+  	socket.broadcast.emit('dartThrown', dart);
+  });
 });
-*/
-
-backend.read(function(req, res) {
-	if(games[req.channel]){
-		res.end(games[req.channel]);
-	} else {
-		games
-	}
-	res.end({});
-});
-
-backend.use(backboneio.middleware.memoryStore());
-
-backboneio.listen(server, { dartbackend	: backend });
