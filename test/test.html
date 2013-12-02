@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../static/bower/mocha/mocha.css" />
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="../static/bower/mocha/mocha.js"></script>
+    <script src="../static/bower/chai/chai.js"></script>
+    <script src="../static/bower/sinonjs/sinon.js"></script>
+    <script src="../static/bower/sinon-chai/lib/sinon-chai.js"></script>
+    <script>
+      mocha.ui('bdd');
+      mocha.reporter('html');
+      expect = chai.expect;
+    </script>
+    <script data-main="test" src="../static/bower/requirejs/require.js"></script>
+  </body>
+</html>

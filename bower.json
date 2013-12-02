@@ -24,6 +24,11 @@
     "underscore": "~1.5.2",
     "requirejs-text": "~2.0.10",
     "socket.io": "~0.9.15",
-    "socket.io-client": "~0.9.16"
+    "socket.io-client": "~0.9.16",
+    "codemirror": "~3.20.0",
+    "mocha": "~1.14.0",
+    "chai": "~1.8.1",
+    "sinon-chai": "~2.4.0",
+    "sinonjs": "~1.7.3"
   }
 }

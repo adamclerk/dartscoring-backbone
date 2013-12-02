@@ -1,0 +1,9 @@
+<h1>Games</h1>
+{{#each .}}
+<h2>{{name}} <small><a href='#config/{{name}}'>start</a></small></h2>
+<p>
+	{{summary}}
+	<br/>
+	<a href='{{rulesLink}}' target='_blank'>Rules</a>
+</p>
+{{/each}}

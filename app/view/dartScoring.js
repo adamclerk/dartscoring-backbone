@@ -22,6 +22,7 @@ function (
 		},
 		render: function () {
 			var template = Handlebars.compile(dartviewtemplate);
+			console.log(this.model.toJSON());
 			this.$el.html(template(this.model.toJSON()));
 		},
 		hoverStart: function(ev){

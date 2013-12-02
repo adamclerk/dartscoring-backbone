@@ -11,15 +11,12 @@ function (_, Backbone, Player, DartThrow, dartEvents) {
 		url: function () { return '/data/games/' + this.id; },
 		constructor: function (options) {
 			if(!options.id){
-				options.id = parseInt(Math.random() * 10000);
+				options.id = parseInt(Math.random() * 10000, 10);
 			}
+
 			this.id = options.id;
 
-			this.players = new Player.Collection(null, {gameid: options.id});
-			//this.players.on('change', this.save, this);
-
-			this.dartsThrown = new DartThrow.Collection(null, {gameid: options.id});
-			//this.dartsThrown.on('change', this.save, this);
+			dartEvents.join(this.id);
 
 			Backbone.Model.apply(this, arguments);
 		},
@@ -27,24 +24,17 @@ function (_, Backbone, Player, DartThrow, dartEvents) {
 			_.bindAll(this, 'addDart');
 			this.listenTo(dartEvents, 'dartThrown', this.addDart);
 		},
-		parse: function (resp) {
-			this.players.set(resp.players, {parse: true, remove: false});
-			delete resp.players;
-
-			this.dartsThrown.set(resp.dartsThrown, {parse: true, remove: false});
-			delete resp.dartsThrown;
-
-			return resp;
+		parse: function(response){
+			var Game = require('game/' + response.options.game);
+			this.game = new Game();
+			this.game.start(response.players, response.options, response.dartsThrown);
+			return response;
 		},
-		toJSON: function () {
-			var attrs = _.clone(this.attributes);
-			attrs.players = this.players.toJSON();
-			attrs.dartsThrown = this.dartsThrown.toJSON();
-			console.log('tojson', attrs);
-			return attrs;
+		toJSON: function(){
+			return {options: this.game.options, info: this.game.info()};
 		},
 		addDart: function (dart) {
-			this.dartsThrown.add(dart);
+			this.game.throwDart(dart);
 			this.trigger('change');
 		},
 		throwDart: function (dart) {
@@ -52,7 +42,8 @@ function (_, Backbone, Player, DartThrow, dartEvents) {
 				return;
 			}
 			this.addDart(dart);
-			dartEvents.emit('throwDart', dart);
+			var payload = {dart: dart, gameid: this.id};
+			dartEvents.emit('throwDart', payload);
 		}
 
 	});

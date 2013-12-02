@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="static/bower/codemirror/lib/codemirror.css">
+<link rel="stylesheet" href="static/bower/codemirror/theme/eclipse.css">
+<div class='error'></div>
+<table class='newgame'>
+  <tr>
+    <td>Unique Game Name</td>
+    <td>
+      <input type='text' id='id'/>
+    </td>
+  </tr>
+  <tr>
+    <td>Friendly Game Name</td>
+    <td>
+      <input type='text' id='name'/>
+    </td>
+  </tr>
+  <tr>
+    <td>Initial Data</td>
+    <td>
+<textarea id='code'>
+{{defaultOptions}}
+</textarea>
+    </td>
+  </tr>
+  <tr>
+    <td>Players (comma separated)</td>
+    <td><input type='text' id='players'>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      <input type='hidden' name='game' id='gametype' value='{{gametype}}'>
+      <input type='submit' value='Start Game' id='startGame'></td>
+  </tr>
+
+</table>
+
+

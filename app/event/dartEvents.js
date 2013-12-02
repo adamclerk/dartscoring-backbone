@@ -27,5 +27,9 @@ function(_, Backbone, io){
 		dartEvents.socket.emit(ev, data);
 	};
 
+	dartEvents.join = function(gameid){
+		dartEvents.socket.emit('joingame', gameid);
+	};
+
 	return dartEvents;
 });

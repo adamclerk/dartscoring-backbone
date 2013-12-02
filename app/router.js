@@ -3,24 +3,38 @@ define([
 	'backbone',
 	'handlebars', 
 	'view/dartScoring',
-	'model/dartScoring'
+	'model/dartScoring',
+	'view/newGame',
+	'view/configureGame'
 ], 
 function(
 	$, 
 	Backbone, 
 	Handlebars, 
 	DartScoringView,
-	DartScoringModel
+	DartScoringModel,
+	NewGameView,
+	ConfigGameView
 ){
 	var router = Backbone.Router.extend({
 		routes: {
-			"": "index",
-			":game": "game"
+			"": "newGame",
+			"config/:gametype": "configGame",
+			"play/:game": "playGame"
 		},
-		index: function () {
-			console.log('start new game');
+		newGame: function () {
+			var newGameView = new NewGameView({
+				el: '.content'
+			});
+			newGameView.render();
 		},
-		game: function(game){
+		configGame: function (gametype) {
+			new ConfigGameView({
+				el: '.content',
+				gametype: gametype 
+			});
+		},
+		playGame: function(game){
 			var modeloptions = {};
 
 			if(game){

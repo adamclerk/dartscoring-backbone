@@ -1,11 +1,26 @@
+
 <div class='left'>
 	{{> dartboard}}
 </div>
 <div class='right'>
 	Game: {{options.game}}<br/>
 	Name: {{options.name}}<br/>
-	{{#each dartsThrown}}
-		Region: {{region}}<br/>
-		Multi: {{multi}}<br/><br/>
+	<br/>
+	<div class='column header'>Name</div>
+	<div class='column header'>Throws</div>
+	<div class='column header'>Score</div>
+	<div class='column header'>2 Win</div>
+	<div class='column header'>Winner</div>
+	<div class='column header'>Busts</div>
+	<div class='clear'></div>
+	{{#each info.players}}
+		<div class='column'>{{#if throwsLeft}}<b>{{name}}</b>{{else}}{{name}}{{/if}}</div>
+		<div class='column'>{{throwsLeft}}</div>
+		<div class='column'>{{score}}</div>
+		<div class='column'>{{scoreToWin}}</div>
+		<div class='column'>{{busts}}</div>
+		<div class='column'>{{#if winner}}WINNER{{else}}&nbsp;{{/if}}</div>
+
+		<div class='clear'></div>
 	{{/each}}
 </div>
