@@ -1,5 +1,5 @@
 /*global module:false*/
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         src: 'Gruntfile.js'
       },
       src: {
-        src: ['app/**/*.js','backend/**/*.js']
+        src: ['app/**/*.js', 'backend/**/*.js']
       },
       test: {
         src: ['test/app/**/*.js', 'test/backend/**/*.js']
@@ -25,10 +25,10 @@ module.exports = function(grunt) {
       }
     },
     exec: {
-      npm_update: {
+      npmUpdate: {
         cmd: 'npm install'
       },
-      bower_update: {
+      bowerUpdate: {
         cmd: 'bower install'
       },
       start: {
@@ -49,9 +49,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-exec');
 
   // Double Check the Project.
-  grunt.registerTask('init', ['exec:npm_update', 'exec:bower_update']);
-  grunt.registerTask('check', ['jsonlint', 'jshint']);
-  grunt.registerTask('test', ['check:test','exec:test']);
-  grunt.registerTask('start', ['exec:npm_update', 'exec:bower_update', 'check', 'test', 'exec:start']);
+  grunt.registerTask('init', ['exec:npmUpdate', 'exec:bowerUpdate']);
+  grunt.registerTask('check', ['jsonlint', 'jshint:gruntfile', 'jshint:src']);
+  grunt.registerTask('test', ['jshint:test', 'exec:test']);
+  grunt.registerTask('start', ['exec:npmUpdate', 'exec:bowerUpdate', 'check', 'test', 'exec:start']);
   grunt.registerTask('default', ['start']);
 };

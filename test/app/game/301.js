@@ -1,23 +1,133 @@
 /* jshint expr: true */
 define([
-  'game/301', 
+  'game/301',
   'sinon',
   'socket.io'
 ], function (
-  Game, 
+  Game,
   sinon
 ) {
-  describe('games', function(){
+  describe('games', function () {
     describe('301', function () {
       var game;
       
-      describe('start', function () {
+      describe('simplegame', function () {
+        beforeEach(function () {
+          game = new Game();
+          game.start(
+            ['adam', 'matt'],
+            {
+              winningScore: 10,
+              dartsPerPlayer: 1
+            },
+            []);
+        });
 
-        beforeEach(function() {
+        it('should score the first throw', function () {
+
+          game.throwDart({region: 1, multi: 1});
+          var result = game.info();
+          expect(result)
+            .to.exist
+            .and.to.be.an('object');
+
+          var player1 = result.players[0],
+              player2 = result.players[1];
+
+          //player 1
+          expect(player1.score).to.equal(1);
+          expect(player1.scoreToWin).to.equal(9);
+
+          //player 2
+          expect(player2.score).to.equal(0);
+          expect(player2.scoreToWin).to.equal(10);
+
+        });
+
+        it('should trigger a single bust', function () {
+
+          game.throwDart({region: 11, multi: 1});
+          var result = game.info();
+          expect(result)
+            .to.exist
+            .and.to.be.an('object');
+
+          var player1 = result.players[0],
+              player2 = result.players[1];
+
+          //player 1
+          expect(player1.score).to.equal(0);
+          expect(player1.scoreToWin).to.equal(10);
+          expect(player1.busts).to.equal(1);
+          expect(player1.playerThrows).to.have.length(1);
+
+          //player 2
+          expect(player2.score).to.equal(0);
+          expect(player2.scoreToWin).to.equal(10);
+          expect(player2.busts).to.equal(0);
+          expect(player2.playerThrows).to.have.length(0);
+
+        });
+
+        it('should trigger a bust and reset the score', function () {
+
+          game.throwDart({region: 1, multi: 1});
+          game.throwDart({region: 1, multi: 1});
+          game.throwDart({region: 11, multi: 1});
+
+          var result = game.info();
+          expect(result)
+            .to.exist
+            .and.to.be.an('object');
+
+          var player1 = result.players[0],
+              player2 = result.players[1];
+
+          expect(player1.score).to.equal(1);
+          expect(player1.scoreToWin).to.equal(9);
+          expect(player1.busts).to.equal(1);
+          expect(player1.playerThrows).to.have.length(2);
+
+          expect(player2.score).to.equal(1);
+          expect(player2.scoreToWin).to.equal(9);
+          expect(player2.busts).to.equal(0);
+          expect(player2.playerThrows).to.have.length(1);
+
+        });
+
+        it('should stop keeping score after a winner is found', function () {
+          game.throwDart({region: 10, multi: 1});
+          game.throwDart({region: 1, multi: 1});
+
+          var result = game.info();
+          expect(result)
+            .to.exist
+            .and.to.be.an('object');
+
+          var player1 = result.players[0],
+              player2 = result.players[1];
+
+          expect(player1.score).to.equal(10);
+          expect(player1.scoreToWin).to.equal(0);
+          expect(player1.busts).to.equal(0);
+          expect(player1.playerThrows).to.have.length(1);
+          expect(player1.won).to.equal(true);
+
+          expect(player2.score).to.equal(0);
+          expect(player2.scoreToWin).to.equal(10);
+          expect(player2.busts).to.equal(0);
+          expect(player2.playerThrows).to.have.length(0);
+          expect(player2.won).to.equal(false);
+        });
+      });
+
+      describe('start', function ()  {
+
+        beforeEach(function () {
           game = new Game();
         });
 
-        it('should add players', function() {
+        it('should add players', function () {
           var options = {
             winningScore: 101
           };
@@ -35,7 +145,7 @@ define([
           expect(game.players[2].name).to.equal('josh');
         });
 
-        it('should have default score of 301', function(){
+        it('should have default score of 301', function () {
           game.start(['adam'], {});
           expect(game.options.winningScore).to.equal(301);
           expect(game.players)
@@ -43,7 +153,7 @@ define([
             .to.have.length(1);
         });
 
-        it('should merge options', function() {
+        it('should merge options', function () {
           var options = {
             winningScore: 101,
             dartsPerPlayer: 6
@@ -53,14 +163,14 @@ define([
           expect(game.options.dartsPerPlayer).to.equal(6);
         });
         
-        it('should call throwDart with thrownDarts', function(){
+        it('should call throwDart with thrownDarts', function () {
           var thrownDarts = [
             {region: 20, multi: 1},
             {region: 20, multi: 1},
             {region: 20, multi: 1}
           ];
 
-          var throwDartSpy = sinon.spy(game, "throwDart");
+          var throwDartSpy = sinon.spy(game, 'throwDart');
           game.start(['adam'], {}, thrownDarts);
           expect(throwDartSpy).to.have.been.calledThrice;
         });
@@ -72,13 +182,13 @@ define([
             {region: 20, multi: 1}
           ];
 
-          var throwDartSpy = sinon.spy(game, "throwDart");
+          var throwDartSpy = sinon.spy(game, 'throwDart');
           game.start(['adam'], {}, thrownDarts);
           expect(throwDartSpy).to.have.been.calledThrice;
           throwDartSpy.restore();
         });
 
-        it('should create a throwHistory array', function() {
+        it('should create a throwHistory array', function () {
           var thrownDarts = [
             {region: 20, multi: 1},
             {region: 20, multi: 1},
@@ -91,7 +201,7 @@ define([
             .to.have.length(3);
         });
 
-        it('should create a gameHistory array', function() {
+        it('should create a gameHistory array', function () {
           var thrownDarts = [
             {region: 20, multi: 1},
             {region: 20, multi: 1},
@@ -104,7 +214,7 @@ define([
             .to.have.length(3);
         });
 
-        it('should label a winner', function() {
+        it('should label a winner', function () {
           game.start(['adam'], {winningScore: 30}, []);
           game.throwDart({region: 10, multi: 1});
           game.throwDart({region: 10, multi: 1});
@@ -115,9 +225,10 @@ define([
         });
       });
 
-      describe('info', function () {
+      describe('info', function ()  {
+        
         var info;
-        beforeEach(function() {
+        beforeEach(function () {
           game = new Game();
           var thrownDarts = [
             {region: 20, multi: 1},
@@ -128,35 +239,33 @@ define([
           info = game.info();
         });
 
-        it('should return json object', function() {
+        it('should return json object', function () {
           expect(info).to.be.an('object');
         });
 
-        it('should have player array', function(){
+        it('should have player array', function () {
           expect(info.players)
             .to.exist
             .to.be.an('array');
         });
-        it('should have throwHistory array', function(){
+        it('should have throwHistory array', function () {
           expect(info.throwHistory)
             .to.exist
             .and.to.be.an('array');
         });
-        it('should have gameHistory array', function(){
+        it('should have gameHistory array', function () {
           expect(info.gameHistory)
             .to.exist
             .and.to.be.an('array');
         });
-        it('should not have winner object', function(){
+        it('should not have winner object', function () {
           expect(info.winner)
             .to.not.exist;
         });
       });
 
       describe('throwDart', function () {
-        it('should trigger dart event on regular dartThrow', function(){
-
-        });
+        it('should trigger dart event on regular dartThrow');
       });
     });
   });

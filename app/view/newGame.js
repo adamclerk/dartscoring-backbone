@@ -1,23 +1,23 @@
 define([
   'jquery',
   'underscore',
-  'backbone', 
+  'backbone',
   'handlebars',
   'text!template/newgame.hbs',
   'game/301',
   'game/cricket'
-], 
+],
 function (
   $,
   _,
-  Backbone, 
+  Backbone,
   Handlebars,
   newGameView
 ) {
   var Games = _.rest(arguments, 5);
   var NewGameView = Backbone.View.extend({
     initialize: function () {
-      this.games = _.map(Games, function(Game){
+      this.games = _.map(Games, function (Game) {
         return new Game();
       });
     },

@@ -3,10 +3,10 @@
 var express = require('express');
 
 var games = {
-	"001":{
+	'001': {
 		options: {
-			game: "301",
-			name: "301",
+			game: '301',
+			name: '301',
 			winningScore: 301,
 			dartsPerTurn: 3
 		},
@@ -15,23 +15,23 @@ var games = {
 	}
 };
 var app = express();
-app.use(express.static(__dirname + "/.."));
+app.use(express.static(__dirname + '/..'));
 app.use(express.urlencoded());
 app.use(express.json());
 
-app.get('/data/games', function(req, res){
+app.get('/data/games', function (req, res) {
 	res.send(games);
 });
 
-app.get('/data/games/:id', function(req, res){
-	if(games[req.params.id]){
+app.get('/data/games/:id', function (req, res) {
+	if (games[req.params.id]) {
 		res.send(games[req.params.id]);
 	} else {
 		res.status(404).send({});
 	}
 });
 
-app.post('/data/games', function(req, res){
+app.post('/data/games', function (req, res) {
 	var game = JSON.parse(req.body.data);
 	var id = game.id;
 	delete game.id;
@@ -48,14 +48,14 @@ server.listen(8000);
 console.log('http://localhost:8000/');
 
 io.sockets.on('connection', function (socket) {
-	socket.on('joingame', function(gameid){
+	socket.on('joingame', function (gameid) {
 		console.log('joining game', gameid);
 		socket.join(gameid);
 	});
 	socket.on('throwDart', function (payload) {
 		var dart = payload.dart;
 		var gameid = payload.gameid;
-		if(games[gameid]){
+		if (games[gameid]) {
 			games[gameid].dartsThrown.push(dart);
 			console.log('sending dart to', gameid);
 			socket.broadcast.to(gameid).emit('dartThrown', dart);

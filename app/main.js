@@ -19,7 +19,7 @@ require.config({
 		'jsonmode': 'static/bower/codemirror/mode/javascript/javascript'
 	},
 	shim: {
-		'jquery':{
+		'jquery': {
 			exports: '$'
 		},
 		'backbone': {
@@ -41,7 +41,7 @@ require.config({
 	}
 });
 
-require(['backbone', 'router'], function(Backbone, Router) {
+require(['backbone', 'router'], function (Backbone, Router) {
 	new Router();
-	Backbone.history.start({pushState: false, root:'/'});
+	Backbone.history.start({pushState: false, root: '/'});
 });

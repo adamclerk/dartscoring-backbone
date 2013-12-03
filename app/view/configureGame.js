@@ -1,16 +1,16 @@
 define([
   'underscore',
   'jquery',
-  'backbone', 
+  'backbone',
   'handlebars',
   'codemirror',
   'jsonmode',
   'text!template/configuregame.hbs'
-], 
+],
 function (
   _,
   $,
-  Backbone, 
+  Backbone,
   Handlebars,
   codeMirror,
   jsonmode,
@@ -33,12 +33,12 @@ function (
       model.gametype = this.gametype;
       this.$el.html(template(model));
       this.code = codeMirror.fromTextArea(document.getElementById('code'), {
-          mode:  "application/json",
-          theme: "eclipse",
+          mode:  'application/json',
+          theme: 'eclipse',
           tabSize: 2
-      });
+        });
     },
-    startGame: function(ev){
+    startGame: function (ev) {
       ev.preventDefault();
       $('.error').html('');
       var sdefaultOptions = this.code.getValue();
@@ -49,7 +49,7 @@ function (
       var options = {};
       try {
         options = JSON.parse(sdefaultOptions);
-      } catch(err) {
+      } catch (err) {
         $('.error').html('<div class="message">An error has occured when parsing your default options</div>');
         $('.error').append('<br/>');
         $('.error').append(err);
@@ -71,10 +71,10 @@ function (
         type: 'POST',
         url: '/data/games',
         data: {data: JSON.stringify(data)},
-        success: function(){
+        success: function () {
           Backbone.history.navigate('/play/' + id, true);
         },
-        error: function(err){
+        error: function (err) {
           $('.error').html('<div class="message">An error has occured when starting your game</div>');
           $('.error').append('<br/>');
           $('.error').append(err);
